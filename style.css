@@ -1,0 +1,68 @@
+#metronome {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    background: maroon;
+    height: 500px;
+    width: 300px;
+}
+
+#top {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 75px;
+    width: 100%;
+    background: burlywood;
+}
+#pendulum {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    height: 80%;
+    width: 40px;
+    transform: translateX(-50%); 
+    background: gray;
+    border-radius: 8px;
+    transform-origin: bottom center;
+    animation: oscillation 2s infinite linear;
+}
+#weight {
+    height: 40px;
+    width: 140%;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: lightgray;
+    border-radius: 5px;
+}
+#bottom {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 120px;
+    width: 100%;
+    background: burlywood;
+} 
+
+.left {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.right {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+@keyframes oscillation {
+    25% {
+        transform: translateX(-50%) rotate(45deg);
+    }
+    75% {
+        transform: translateX(-50%) rotate(-45deg);
+    }
+}
