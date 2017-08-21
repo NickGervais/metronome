@@ -1,13 +1,21 @@
-#metronome {
+body {
+    background: black;
+}
+.wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);  
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#metronome {
+    position: relative;
     background: maroon;
     height: 500px;
     width: 300px;
 }
-
 #top {
     position: absolute;
     top: 0px;
@@ -26,7 +34,7 @@
     background: gray;
     border-radius: 8px;
     transform-origin: bottom center;
-    animation: oscillation 2s infinite linear;
+    animation: oscillation infinite linear;
 }
 #weight {
     height: 40px;
@@ -46,18 +54,39 @@
     width: 100%;
     background: burlywood;
 } 
-
-.left {
-    position: absolute;
-    left: 0px;
-    top: 0px;
+ .controller {
+    width: 100%;
 }
-.right {
-    position: absolute;
-    right: 0px;
-    top: 0px;
+ .display {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}  
+ #bpm {
+    font-size: 40px;
+    color: white;
+    font-family: sans-serif;
+} 
+#play {
+    height: 60px;
+    width: 60px;
 }
-
+.slider {
+    display: flex;
+    justify-content: space-between;
+}
+#minus {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+}
+#plus {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+}
 @keyframes oscillation {
     25% {
         transform: translateX(-50%) rotate(45deg);

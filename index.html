@@ -2,21 +2,80 @@
 <html>
     <head>
         <title>Metronome</title>
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id="metronome">
-            <div id="top">
+        <div class="wrapper">
+            <div id="metronome">
+                <div id="top">
+                </div>
+                <div id="pendulum">
+                    <div id="weight"></div>
+                </div>
+                <div id="bottom">
+                </div>
             </div>
-            <div id="pendulum">
-                <div id="weight"></div>
+
+            <div class="controller">
+                <div class="display">
+                    <div id="bpm"></div>
+                    <svg id="play" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 5v14l11-7z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </div>
+                <div class="slider">
+                    <svg id="minus" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 13H5v-2h14v2z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                    <input type="range" id="sliderVal" onchange="setBpm(this.value);" value="100" min="40" max="218" step="1">
+                    <svg id="plus" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </div>
             </div>
-            <div id="bottom">
-            </div>
-            <span class="left top-diagonal"></span>
-            <span class="left bottom-diagonal"></span>
-            <span class="right top-diagonal"></span>
-            <span class="right bottom-diagonal"></span>
         </div>
+        <script>
+            $(document).ready(function() {
+                setBpm($("#sliderVal").val());
+            });
+            function setBpm(val) {
+                $("#bpm").html(val);
+                if(val == 0){
+                    $("#pendulum").css("animation-duration", "0s");
+                    return;
+                }
+                x = 1 / (val / 120);
+                $("#pendulum").css("animation-duration", x + "s");
+            }
+            $("#plus").click(function () {
+                slider = $("#sliderVal");
+                slider.val( function(i,oldval) {
+                    return ++oldval;
+                });
+                setBpm(slider.val());
+            });
+            $("#minus").click(function() {
+                slider = $("#sliderVal");
+                slider.val( function(i, oldval) {
+                    return --oldval;
+                });
+                setBpm(slider.val());
+            });
+            paused = false;
+            $("#play").click(function(){
+                if(!paused){
+                    $("#pendulum").css("animation-duration", "0s");
+                    paused = true;
+                } else {
+                    x = 1 / ($(sliderVal).val() / 120);
+                    $("#pendulum").css("animation-duration", x + "s");
+                    paused = false;
+                }
+            });
+        </script>
     </body>
 </html>
